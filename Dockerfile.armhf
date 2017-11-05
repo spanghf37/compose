@@ -7,7 +7,7 @@ RUN set -xe
 RUN apt-get update
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update
+# RUN apt-get update
 RUN apt-get install -y \
         locales \
         gcc \
