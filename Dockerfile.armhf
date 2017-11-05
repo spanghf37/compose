@@ -1,6 +1,6 @@
 FROM armhf/debian:wheezy
  
-RUN set -ex
+# RUN set -ex
 RUN apt-get update -qq
 RUN apt-get install -y \
         locales \
