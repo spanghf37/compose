@@ -5,7 +5,7 @@ COPY tmp/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
 RUN set -xe
 RUN apt-get update
-RUN apt-get install software-properties-common
+RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
 RUN apt-get install -y \
