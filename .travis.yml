@@ -13,7 +13,7 @@ script:
   tar xzf qemu-aarch64-static.tar.gz &&
   popd
 # build image
-- docker build -t docker-compose:armhf -f Dockerfile.armhf .
+- docker build -t spanghf37/docker-compose -f Dockerfile.armhf .
 # test image
 # - docker run spanghf37/knxd uname -a
 # push image
