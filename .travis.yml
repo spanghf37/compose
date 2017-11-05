@@ -18,6 +18,6 @@ script:
 # - docker run spanghf37/knxd uname -a
 # push image
 - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-- docker tag spanghf37/knxd spanghf37/docker-compose:arm64
+- docker tag spanghf37/docker-compose spanghf37/docker-compose:arm64
 - docker push spanghf37/docker-compose:arm64
  
