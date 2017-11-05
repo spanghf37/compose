@@ -1,29 +1,22 @@
 sudo: required
-
-language: python
-
-matrix:
-  include:
-    - os: linux
-      services:
-      - docker
-    - os: osx
-      language: generic
-
-install: ./script/travis/install
-
+services:
+- docker
+language: bash
 script:
-  - ./script/travis/ci
-  - ./script/travis/build-binary
-
-before_deploy:
-  - "./script/travis/render-bintray-config.py < ./script/travis/bintray.json.tmpl > ./bintray.json"
-
-deploy:
-  provider: bintray
-  user: docker-compose-roleuser
-  key: '$BINTRAY_API_KEY'
-  file: ./bintray.json
-  skip_cleanup: true
-  on:
-    all_branches: true
+# prepare qemu
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# get qemu-aarch64-static binary (arm 64bits)
+- mkdir tmp
+- >
+  pushd tmp &&
+  curl -L -o qemu-aarch64-static.tar.gz https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1/qemu-aarch64-static.tar.gz &&
+  tar xzf qemu-aarch64-static.tar.gz &&
+  popd
+# build image
+- docker build -t docker-compose:armhf -f Dockerfile.armhf .
+# test image
+# - docker run spanghf37/knxd uname -a
+# push image
+- docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+- docker tag spanghf37/knxd spanghf37/docker-compose:arm64
+- docker push spanghf37/docker-compose:arm64
