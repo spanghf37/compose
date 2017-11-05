@@ -20,7 +20,7 @@ RUN apt-get install -y \
         curl \
         libsqlite3-dev \
         libbz2-dev \
-        python3.4 \
+        python \
         python2.7 \
         python-pip
 RUN rm -rf /var/lib/apt/lists/*
